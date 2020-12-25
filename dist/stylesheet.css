@@ -1,0 +1,35 @@
+
+
+
+.left-sidebar{
+    width: 150px;
+    height: 300px;
+    border: 1px solid black;
+    float: left;
+
+}
+
+main {
+    height: 500px;
+    text-align: center;
+    border: 1px solid black;
+    margin-left: 160px;
+    
+}
+
+#new-project-form{
+    background-color: tan;
+    border: 1px solid black;
+    height: 250px;
+    width: 400px;
+    position: fixed;
+    top: 30%;
+    left: 48%;
+    visibility: hidden;
+}
+
+.display-title{
+    color: red;
+}
+
+
