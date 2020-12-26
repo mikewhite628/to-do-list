@@ -46,8 +46,10 @@ function projectQueue(){
     projects.forEach((item) => {
         const div = createHtmlElement('div', item.id, ['projects-pending', 'project-display'], null);
         const title = createHtmlElement('div', item.id, ['display-title'], item.title);
+        const deleteTask = createHtmlElement('button', item.id, ['delete-task'], 'Delete')
         main.appendChild(div);
-        div.appendChild(title)
+        div.appendChild(title);
+        title.appendChild(deleteTask)
     })
 }
 

@@ -1,4 +1,4 @@
-import {content, createHtmlElement, form, store, save, projects_deserialized} from './index.js'
+import {content, createHtmlElement, form, home} from './index.js'
 import {upcomingProjects, projectQueue, addTasksForm, createList} from './dom.js'
 import {createProject, projects} from './create-project.js'
 import { nanoid } from 'nanoid'
@@ -69,8 +69,21 @@ function addTodos(e){
     })
 }
 
+function remove(e) {
+    let item = e.target.parentElement.getAttribute('id')
+    e = e.target.innerHTML
+   if(e === 'Delete'){
+       projects.forEach((project, index) => {
+           if (project.id === item){
+               projects.splice(index, 1)
+               localStorage.setItem('projects', JSON.stringify(projects))
+                location.reload()
+           }
+       })
+   }
+}
 
 
 
-export {submitNewProject, addNew, addTodos, checkList, checkListItems}
+export {submitNewProject, addNew, addTodos, checkList, checkListItems,remove}
 

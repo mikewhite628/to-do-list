@@ -1,7 +1,5 @@
 const projects = JSON.parse(localStorage.getItem('projects') || '[]')
 function createProject(title, description, id, list){
-    
-
     const project = {
     title: title,
     description: description,
