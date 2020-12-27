@@ -13,7 +13,9 @@ function checkList(e){
     const addNewItem = document.getElementById('add-todo')
 
     if(e === addNewItem){
-        checkListItems.push(newItem.value) 
+        let id = nanoid()
+        let item = newItem.value
+        checkListItems.push({item, id}) 
         newItem.value = ''
         console.log(checkListItems)     
     }
@@ -53,19 +55,24 @@ function addTodos(e){
             const div = createHtmlElement('div', item.id, ['new-todo'], null)
             const header = createHtmlElement('h2', null, null, item.title)
             const description = createHtmlElement('div', null, null, item.description)
-            const ul = createHtmlElement('ul', null, null, 'Pendinbg Tasks')
+            const ul = createHtmlElement('ul', null, null, 'Pending Tasks')
+            const newTaskField = createHtmlElement('input', item.id, ['new-task-input'], null)
+            const newTask = createHtmlElement('button', item.id, ['add-task'], '+')
             item.list.forEach((node) =>{
-                const li = createHtmlElement('li',null,null, null)
-                li.appendChild(document.createTextNode(node))
+                const remove = createHtmlElement('button', node.id, null, 'x')
+                const li = createHtmlElement('li',null,['checklist-item'], null)
+                li.appendChild(document.createTextNode(node.item))
                 ul.appendChild(li)
+                li.appendChild(remove)
             })
+
             main.appendChild(div);
             div.appendChild(header);
+            header.appendChild(newTaskField)
+            header.appendChild(newTask)
             div.appendChild(description);
             div.appendChild(ul);
         }
-
-
     })
 }
 
@@ -84,6 +91,40 @@ function remove(e) {
 }
 
 
+function removeChecklistItem(e){
+    let item = e.target.getAttribute('id')
+    e = e.target.innerHTML
+    if (e === 'x'){
+        projects.forEach((project) => {
+            project.list.forEach((node, index) => {
+                if (item === node.id) {
+                    project.list.splice(index, 1)
+                    localStorage.setItem('projects', JSON.stringify(projects))
+                }
+            })
 
-export {submitNewProject, addNew, addTodos, checkList, checkListItems,remove}
+        })
+    }
+}
+
+function addToChecklist(e){
+    const add = document.querySelector('.add-task')
+    const id = e.target.getAttribute('id')
+    const task = document.querySelector('.new-task-input')
+    if(e.target === add){
+        projects.forEach((project) =>{
+            if(project.id === id){
+                let item = task.value;
+                let id = nanoid()
+                project.list.push({item, id})
+                localStorage.setItem('projects', JSON.stringify(projects))
+                console.log(projects)
+            }
+        })
+    }
+}
+console.log(projects)
+
+
+export {submitNewProject, addNew, addTodos, checkList, checkListItems,remove, removeChecklistItem, addToChecklist}
 

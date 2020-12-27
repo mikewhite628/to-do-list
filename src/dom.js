@@ -1,6 +1,7 @@
 import {content, createHtmlElement} from './index.js'
 import {createProject, projects} from './create-project.js'
 import {checkListItems} from './listeners.js'
+import { nanoid } from 'nanoid'
 
 
 function render() {
@@ -69,7 +70,7 @@ function createList(){
     ul.innerHTML = ''
     checkListItems.forEach((item) => {
         const li = createHtmlElement('li',null,['checklist-create'], null)
-        li.appendChild(document.createTextNode(item))
+        li.appendChild(document.createTextNode(item.item))
         ul.appendChild(li)
     })
 

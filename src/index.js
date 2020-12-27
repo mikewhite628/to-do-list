@@ -1,6 +1,6 @@
 import {createProject} from './create-project.js'
 import {upcomingProjects, renderDom, projectQueue, addTasks} from './dom.js'
-import {submitNewProject, addNew, addTodos, checkList, remove} from './listeners.js'
+import {submitNewProject, addNew, addTodos, checkList, remove, removeChecklistItem, addToChecklist} from './listeners.js'
 
 const content = document.getElementById('main-section');
 const form = document.getElementById('new-project-form')
@@ -28,11 +28,15 @@ function home(){
 home();
 
 
+
+document.addEventListener('click', removeChecklistItem)
 document.addEventListener('click', remove)
 document.addEventListener('click', submitNewProject);
 document.addEventListener('click', addNew);
 document.addEventListener('click', addTodos);
 document.addEventListener('click', checkList);
+document.addEventListener('click', addToChecklist)
+
 
 
 
