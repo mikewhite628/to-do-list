@@ -1,5 +1,5 @@
-import {content, createHtmlElement, form, home} from './index.js'
-import {upcomingProjects, projectQueue, addTasksForm, createList} from './dom.js'
+import {form, home} from './index.js'
+import {upcomingProjects, projectQueue, renderDom, createList, viewProject} from './dom.js'
 import {createProject, projects} from './create-project.js'
 import { nanoid } from 'nanoid'
 
@@ -27,12 +27,16 @@ function submitNewProject(e){
     e = e.target
     e.preventDefault
     const submit = document.getElementById('new-project-submit')
+    const radios = document.querySelector('input[name="priority"]:checked')
+    const date = document.getElementById('due-date')
+
     if(e === submit){
-    createProject(title.value, description.value, nanoid(), checkListItems)
+    createProject(title.value, description.value, nanoid(), checkListItems, radios.value, date.value)
     upcomingProjects()
     projectQueue()
     form.style.visibility = 'hidden'
     checkListItems = [];
+    location.reload()
     }
 };
 
@@ -50,28 +54,8 @@ function addTodos(e){
     
     projects.forEach((item) => {
         if (item.id === e) {
-            const main = document.querySelector('.main');
-            main.innerHTML = ''
-            const div = createHtmlElement('div', item.id, ['new-todo'], null)
-            const header = createHtmlElement('h2', null, null, item.title)
-            const description = createHtmlElement('div', null, null, item.description)
-            const ul = createHtmlElement('ul', null, null, 'Pending Tasks')
-            const newTaskField = createHtmlElement('input', item.id, ['new-task-input'], null)
-            const newTask = createHtmlElement('button', item.id, ['add-task'], '+')
-            item.list.forEach((node) =>{
-                const remove = createHtmlElement('button', node.id, null, 'x')
-                const li = createHtmlElement('li',null,['checklist-item'], null)
-                li.appendChild(document.createTextNode(node.item))
-                ul.appendChild(li)
-                li.appendChild(remove)
-            })
-
-            main.appendChild(div);
-            div.appendChild(header);
-            header.appendChild(newTaskField)
-            header.appendChild(newTask)
-            div.appendChild(description);
-            div.appendChild(ul);
+            viewProject(item)
+            
         }
     })
 }
@@ -92,14 +76,15 @@ function remove(e) {
 
 
 function removeChecklistItem(e){
-    let item = e.target.getAttribute('id')
+    let task = e.target.getAttribute('id')
     e = e.target.innerHTML
     if (e === 'x'){
-        projects.forEach((project) => {
-            project.list.forEach((node, index) => {
-                if (item === node.id) {
-                    project.list.splice(index, 1)
+        projects.forEach((item) => {
+            item.list.forEach((node, index) => {
+                if (task === node.id) {
+                    item.list.splice(index, 1)
                     localStorage.setItem('projects', JSON.stringify(projects))
+                    viewProject(item)
                 }
             })
 
@@ -118,13 +103,20 @@ function addToChecklist(e){
                 let id = nanoid()
                 project.list.push({item, id})
                 localStorage.setItem('projects', JSON.stringify(projects))
+                viewProject(project)
                 console.log(projects)
             }
         })
     }
 }
-console.log(projects)
+
+function goHome(e){
+const homeBtn = document.getElementById('home')
+if (e.target === homeBtn) {
+home()
+    }
+}
 
 
-export {submitNewProject, addNew, addTodos, checkList, checkListItems,remove, removeChecklistItem, addToChecklist}
+export {submitNewProject, addNew, addTodos, checkList, checkListItems,remove, removeChecklistItem, addToChecklist, goHome}
 

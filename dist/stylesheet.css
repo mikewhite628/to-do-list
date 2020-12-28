@@ -1,6 +1,9 @@
 
 
-
+.nav {
+    height: 60px;
+    width: 90px;
+}
 .left-sidebar{
     width: 150px;
     height: 300px;
@@ -29,7 +32,7 @@ main {
 }
 
 .display-title{
-    color: red;
+    color: black;
 }
 
 .delete-task {
