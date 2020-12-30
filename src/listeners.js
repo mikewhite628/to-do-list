@@ -1,5 +1,5 @@
 import {form, home} from './index.js'
-import {upcomingProjects, projectQueue, renderDom, createList, viewProject} from './dom.js'
+import {upcomingProjects, projectQueue, transparentLayer, createList, viewProject} from './dom.js'
 import {createProject, projects} from './create-project.js'
 import { nanoid } from 'nanoid'
 
@@ -15,7 +15,7 @@ function checkList(e){
     if(e === addNewItem){
         let id = nanoid()
         let item = newItem.value
-        checkListItems.push({item, id}) 
+        checkListItems.push({item, id, complete: 'incomplete'}) 
         newItem.value = ''
         console.log(checkListItems)     
     }
@@ -35,6 +35,7 @@ function submitNewProject(e){
     upcomingProjects()
     projectQueue()
     form.style.visibility = 'hidden'
+    transparentLayer.style.visibility = 'hidden'
     checkListItems = [];
     location.reload()
     }
@@ -44,8 +45,10 @@ function addNew(e){
     e = e.target
     e.preventDefault
     const add = document.querySelector('.add-new')
-    if(e === add)
-    form.style.visibility = 'visible'
+    if(e === add){
+        transparentLayer.style.visibility = 'visible'
+        form.style.visibility = 'visible'
+    }
 };
 
 
@@ -110,6 +113,26 @@ function addToChecklist(e){
     }
 }
 
+function completeChecklist(e){
+    let checkbox = document.querySelectorAll('.checkbox')
+    projects.forEach((item) => {
+        item.list.forEach((node) => {
+            checkbox.forEach((el) => {
+                if (el.id === node.id && el.checked){
+                    node.complete = 'complete'
+                    localStorage.setItem('projects', JSON.stringify(projects))
+                } else if (el.id === node.id && el.checked === false){
+                    node.complete = 'incomplete'
+                    localStorage.setItem('projects', JSON.stringify(projects))
+                }
+            })
+        })
+    })
+    
+}
+
+
+
 function goHome(e){
 const homeBtn = document.getElementById('home')
 if (e.target === homeBtn) {
@@ -118,5 +141,5 @@ home()
 }
 
 
-export {submitNewProject, addNew, addTodos, checkList, checkListItems,remove, removeChecklistItem, addToChecklist, goHome}
+export {submitNewProject, addNew, addTodos, checkList, checkListItems,remove, removeChecklistItem, addToChecklist, goHome, completeChecklist}
 

@@ -1,11 +1,12 @@
-import {content, createHtmlElement} from './index.js'
-import {createProject, projects} from './create-project.js'
+import {content, createHtmlElement, form} from './index.js'
+import {projects} from './create-project.js'
 import {checkListItems} from './listeners.js'
-import { nanoid } from 'nanoid'
 
+
+const transparentLayer = document.getElementById('transparent-layer')
 
 function render() {
-    const header = createHtmlElement('h1', null, null, 'Get Er Done')
+    const header = createHtmlElement('h1', null, null, 'Get It Done')
     const nav = createHtmlElement('nav', 'home', null, 'Home')
     const sidebar = createHtmlElement('div', null, ['left-sidebar'], null)
     const sidebarHeader = createHtmlElement('h3', null, null, 'Projects')
@@ -33,8 +34,10 @@ function upcomingProjects() {
     projects.forEach((item) => {
         const div = createHtmlElement('div', item.id, ['project-display'], null)
         const title = createHtmlElement('div', item.id, ['todo-sidebar', 'display-title'], item.title)
+        const date = createHtmlElement('div', item.id, ['date-sidebar'], `Due: ${item.date}`)
         pending.appendChild(div)
         div.appendChild(title)
+        title.appendChild(date)
         if(item.priority === 'urgent'){
             title.style.color = 'red'
         }
@@ -45,6 +48,7 @@ function projectQueue(){
     const main = document.querySelector('.main');
     const mainHeader = document.querySelector('.main-header')
     const addNew = document.querySelector('.add-new')
+    const projectContainer = createHtmlElement('div', null, ['project-container'], null)
     main.innerHTML = ''
 
     main.appendChild(mainHeader)
@@ -53,9 +57,12 @@ function projectQueue(){
         const div = createHtmlElement('div', item.id, ['projects-pending', 'project-display'], null);
         const title = createHtmlElement('div', item.id, ['display-title'], item.title);
         const deleteTask = createHtmlElement('button', item.id, ['delete-task'], 'Delete')
-        main.appendChild(div);
+        const description = createHtmlElement('div', null, ['description'], item.description)
+        main.appendChild(projectContainer)
+        projectContainer.appendChild(div);
         div.appendChild(title);
-        title.appendChild(deleteTask)
+        title.appendChild(description)
+        div.appendChild(deleteTask )
         if(item.priority === 'urgent'){
             title.style.color = 'red'
         }
@@ -94,28 +101,33 @@ function viewProject(item){
             const ul = createHtmlElement('ul', null, null, 'Pending Tasks')
             const newTaskField = createHtmlElement('input', item.id, ['new-task-input'], null)
             const newTask = createHtmlElement('button', item.id, ['add-task'], '+')
+            const date = createHtmlElement('div', item.id, ['main-date-display'], `DeadLine: ${item.date}`)
 
             item.list.forEach((node) =>{
-                const remove = createHtmlElement('button', node.id, null, 'x')
+                const remove = createHtmlElement('button', node.id, ['null'], 'x')
                 const li = createHtmlElement('li',null,['checklist-item'], null)
+                const checkbox = createHtmlElement('input', node.id, ['checkbox'], null)
+                checkbox.type = 'checkbox'
+                li.appendChild(checkbox)
+                if(node.complete == 'complete'){
+                    checkbox.checked = true
+                 }
                 li.appendChild(document.createTextNode(node.item))
                 ul.appendChild(li)
                 li.appendChild(remove)
+                
+
             })
 
             main.appendChild(div);
             div.appendChild(header);
+            header.appendChild(date)
             header.appendChild(newTaskField)
             header.appendChild(newTask)
             div.appendChild(description);
             div.appendChild(ul);
-            
-
 }
 
 
 
-
-
-
-export {upcomingProjects, render as renderDom, projectQueue, addTasksForm, createList, viewProject}
+export {upcomingProjects, render as renderDom, projectQueue, addTasksForm, createList, viewProject, transparentLayer}

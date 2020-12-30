@@ -1,34 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap');
 
-
-.nav {
-    height: 60px;
-    width: 90px;
-}
-.left-sidebar{
-    width: 150px;
-    height: 300px;
-    border: 1px solid black;
-    float: left;
-
-}
-
-main {
-    height: 500px;
-    text-align: center;
-    border: 1px solid black;
-    margin-left: 160px;
+body {
+    font-family: 'Open Sans Condensed';
+    font-style: normal;
+    background: linear-gradient(0deg, #48c6ef, #6f86d6);
+    width: 100%;
+    min-height: 100vh;
+    background-size: cover;
     
 }
 
+#transparent-layer{
+    background-color: rgb(0,0,0,.7);
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    margin-left: -10px;
+    margin-top: -25px;
+    z-index: 5;
+    visibility: hidden;
+}
+h1 {
+    font-family: 'Open Sans Condensed';
+    font-style: italic;
+    text-align: center;
+    color: white;
+}
+nav {
+    text-align: center;
+    font-size: 25px;
+    color: white;
+}
+
+.left-sidebar{
+    display: inline-flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 150px;
+    min-height: 300px;
+    border: 2px solid black;
+    float: left;
+    background-color:white;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px;
+}
+
+.todo-sidebar {
+    margin-bottom: 10px;
+}
+
+main {
+    min-height: 300px;
+    text-align: center;
+    border: 1px solid black;
+    margin-left: 160px;
+    margin-right: 15px;
+    border:2px solid  black;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 3px 3px 10px;
+    
+}
+
+.add-new{
+    width: 30px;
+    height: 50px;
+    float: left;
+}
+
+.project-container{
+    display: grid;
+    grid-template-columns:repeat(auto-fit, minmax(130px, 1fr));
+    justify-items: center;
+   
+    
+}
+
+.projects-pending{
+    border: 1px solid black;
+    margin-bottom: 20px;
+    height: 100px;
+    width: 120px;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px;
+}
+
+.display-title {
+    font-size: 16px;
+}
+
+.description {
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+.delete-task {
+    position: absolute;
+    font-family: 'Open Sans Condensed';
+    font-size: 12px;
+    height: 18px;
+    width: 38px;
+    bottom: 5%;
+    left: 32%;
+    
+    
+
+}
+
+.project-display {
+
+}
+
 #new-project-form{
+    position: fixed;
     background-color: tan;
     border: 1px solid black;
     height: 250px;
-    width: 400px;
-    position: fixed;
+    width: 280px;
     top: 30%;
-    left: 48%;
+    left: 40%;
     visibility: hidden;
+    text-align: left;
+    overflow-wrap: break-word;
+    overflow-y: scroll;
+    z-index: 10;
+
+}
+
+#new-project-submit {
+    margin-left: 110px;
+    margin-bottom: 10px;
 }
 
 .display-title{
