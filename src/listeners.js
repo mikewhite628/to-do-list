@@ -13,11 +13,15 @@ function checkList(e){
     const addNewItem = document.getElementById('add-todo')
 
     if(e === addNewItem){
+        if(newItem.value === ''){
+            alert('Please enter a task')
+        } else {
         let id = nanoid()
         let item = newItem.value
         checkListItems.push({item, id, complete: 'incomplete'}) 
         newItem.value = ''
-        console.log(checkListItems)     
+        console.log(checkListItems)
+        }     
     }
     
     createList()
@@ -29,8 +33,11 @@ function submitNewProject(e){
     const submit = document.getElementById('new-project-submit')
     const radios = document.querySelector('input[name="priority"]:checked')
     const date = document.getElementById('due-date')
-
+    
     if(e === submit){
+        if (title.value === '' || description.value === '' || date.value === '' || radios.value === '') {
+            alert('Please make sure all fields are properly filled in') 
+        } else {                                                           
     createProject(title.value, description.value, nanoid(), checkListItems, radios.value, date.value)
     upcomingProjects()
     projectQueue()
@@ -38,6 +45,8 @@ function submitNewProject(e){
     transparentLayer.style.visibility = 'hidden'
     checkListItems = [];
     location.reload()
+    clearForm()
+        }
     }
 };
 
@@ -141,5 +150,21 @@ home()
 }
 
 
-export {submitNewProject, addNew, addTodos, checkList, checkListItems,remove, removeChecklistItem, addToChecklist, goHome, completeChecklist}
+function closeForm(e){
+    const close = document.querySelector('.close-form')
+    if (e.target === close){
+    form.style.visibility = 'hidden'
+    transparentLayer.style.visibility = 'hidden'
+    clearForm()
+    }
+}
+
+function clearForm(){
+    title.value = ''
+    description.value =''
+    date.value = ''
+    radios.value = ''
+    checkListItems = []
+}
+export {submitNewProject, addNew, addTodos, checkList, checkListItems,remove, removeChecklistItem, addToChecklist, goHome, completeChecklist, closeForm}
 

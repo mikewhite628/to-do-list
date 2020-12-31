@@ -98,13 +98,15 @@ function viewProject(item){
             const div = createHtmlElement('div', item.id, ['new-todo'], null)
             const header = createHtmlElement('h2', null, null, item.title)
             const description = createHtmlElement('div', null, null, item.description)
-            const ul = createHtmlElement('ul', null, null, 'Pending Tasks')
+            const ul = createHtmlElement('ul', 'project-checklist', null, 'Pending Tasks')
             const newTaskField = createHtmlElement('input', item.id, ['new-task-input'], null)
             const newTask = createHtmlElement('button', item.id, ['add-task'], '+')
             const date = createHtmlElement('div', item.id, ['main-date-display'], `DeadLine: ${item.date}`)
 
+            newTaskField.placeholder = 'Add a new task...'
+
             item.list.forEach((node) =>{
-                const remove = createHtmlElement('button', node.id, ['null'], 'x')
+                const remove = createHtmlElement('button', node.id, ['x-task'], 'x')
                 const li = createHtmlElement('li',null,['checklist-item'], null)
                 const checkbox = createHtmlElement('input', node.id, ['checkbox'], null)
                 checkbox.type = 'checkbox'
@@ -126,6 +128,8 @@ function viewProject(item){
             header.appendChild(newTask)
             div.appendChild(description);
             div.appendChild(ul);
+
+            
 }
 
 
