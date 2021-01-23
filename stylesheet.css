@@ -1,0 +1,265 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap');
+
+body {
+    font-family: 'Open Sans Condensed';
+    font-style: normal;
+    background: linear-gradient(0deg, #48c6ef, #6f86d6);
+    width: 100%;
+    min-height: 100vh;
+    background-size: cover;
+    
+}
+
+#transparent-layer{
+    background-color: rgb(0,0,0,.7);
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    margin-left: -10px;
+    margin-top: -25px;
+    z-index: 5;
+    visibility: hidden;
+}
+h1 {
+    font-family: 'Open Sans Condensed';
+    font-style: italic;
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 3px black;
+}
+
+nav {
+    text-align: center;
+    font-size: 25px;
+    height:40px;
+    color: white;
+    background-color: #D6bf6f;
+    margin-bottom: 5px;
+    box-shadow: 1px 1px 5px black;
+    z-index: 6;
+    margin-left: -10px;
+    text-shadow: 1px 1px 3px black;
+
+}
+
+nav:hover{
+    transition: transform 100ms;
+    transform: scale(1.07);
+    background-color: #D6bf6f;
+}
+
+.main-header {
+    text-shadow: .3px .3px 1px black;
+    font-size: 25px;
+}
+
+.left-sidebar{
+    display: inline-flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 150px;
+    min-height: 300px;
+    border: 3px solid #6f86d6;
+    float: left;
+    background-color:white;
+    box-shadow: 3px 3px 5px;
+    padding-left: 10px;
+    border-radius: 5px;
+    text-shadow: .3px .3px 1px black;
+}
+
+.todo-sidebar {
+    margin-bottom: 10px;
+    transition: transform 100ms;
+}
+
+.todo-sidebar:hover{
+    background-color: #f2ebd2;
+    transform: scale(1.03);
+}
+
+main {
+    min-height: 300px;
+    text-align: center;
+    margin-left: 180px;
+    margin-right: 15px;
+    border: 3px solid  #6f86d6;
+    background-color: white;
+    box-shadow: 3px 3px 10px;
+    border-radius: 5px;
+    text-shadow: .3px .3px 1px black;
+    
+}
+
+.add-new{
+    width: 30px;
+    height: 50px;
+    float: left;
+    margin-left: 5px;
+    background-color: #D6bf6f;
+    border: none;
+    border-radius: 10px;
+    transition: transform 500ms;
+    box-shadow: 1px 1px 3px black;
+}
+
+.add-new:hover{
+    transform: scale(1.1)
+}
+.project-container{
+    display: grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+    justify-items: center;
+   
+    
+}
+
+.projects-pending{
+    border: 1px solid #f2ebd2;
+    margin-bottom: 20px;
+    min-height: 150px;
+    width: 160px;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px;
+    background-color: #f2ebd2;
+    transition: transform 300ms;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.projects-pending:hover{
+    transform: scale(1.08)
+}
+
+.display-title {
+    font-size: 16px;
+}
+
+.description {
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+.delete-task {
+    position: absolute;
+    font-family: 'Open Sans Condensed';
+    font-size: 12px;
+    padding:0px;
+    height: 15px;
+    width: 23px;
+    right: 2%;
+    top: 2%;
+    font-size: 10px;
+    border: none;
+    border-radius: 2px;
+    background-color: #f2ebd2;
+    color: red;
+}
+
+.project-display {
+
+}
+
+#project-checklist{
+    text-align: left;
+    margin-left: 250px;
+    margin-right: 250px
+}
+
+.x-task{
+    padding: 0;
+    height:10px;
+    width: 10px;
+    font-size: 10px;
+    text-align: center;
+    background-color: red;
+    border: none;
+    margin-left: 10px;
+}
+
+.add-task{
+    background-color: #D6bf6f;
+    border: none;
+    margin-left: 1px;
+    height:22px
+}
+
+.main-date-display {
+    font-size: 16px;
+}
+
+.new-task-input{
+
+}
+
+.form-title{
+    font-size: 30px;
+    margin-left: 50px;
+    margin-bottom: 20px;
+}
+
+.close-form{
+    font-size: 12px;
+    float: right;
+    margin-top: -10px;
+    margin-right: -10px;
+    color: red;
+}
+
+#new-project-form{
+    position: fixed;
+    background-color: #f2ebd2;
+    border: 5px solid #6f86d6;
+    border-radius: 8px;
+    height: 250px;
+    width: 280px;
+    top: 30%;
+    left: 40%;
+    visibility: hidden;
+    text-align: left;
+    overflow-wrap: break-word;
+    overflow-y: scroll;
+    z-index: 10;
+    padding: 20px;
+    text-shadow: .3px .3px 1px black;
+
+}
+
+#add-todo {
+    background-color:#D6bf6f;
+    border: none;
+    border-radius: 3px;
+}
+
+li {
+    list-style-type: none;
+}
+
+li:hover{
+    transition: transform 100ms;
+    transform: scale(1.1);
+}
+
+.checklist-create::before{
+    content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+    color: #6f86d6; /* Change the color */
+    display: inline-block; /* Needed to add space between the bullet and the text */
+    width: 1em; /* Also needed for space (tweak if needed) */
+    margin-left: -1em; /* Also needed for space (tweak if needed) */
+}
+
+#new-project-submit {
+    margin-left: 110px;
+    margin-bottom: 10px;
+    background-color:#D6bf6f;
+    border: none;
+    border-radius: 5px;
+    
+}
+
+.display-title{
+    color: black;
+}
+

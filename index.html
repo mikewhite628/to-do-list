@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='stylesheet.css'>
+    <title>To Do List</title>
+</head>
+<body>
+        <div id='transparent-layer'></div>
+    <div id='main-section'></div>
+        
+                    <form id='new-project-form'>
+                        <div class='form-title'> Create New Project <span class='close-form'>close</span></div>
+                        
+                        <label for='title'> Title: </label>
+                        <input type='text' id='title' name='title'><br>
+                        <label for='Due-Date'> Due-Date: </label>
+                        <input type='date' id='due-date' name='due-date'><br>
+                        <label for='description'>Description:</label>
+                        <input type="text" id='description' name='description'><br>
+                        <label for='priority'>Priority:</label>
+                        <input type="radio" id='urgent' name='priority' value='urgent'>
+                        <label for='urgent'>Urgent</label>
+                        <input type='radio' id='normal' name='priority' value="normal">
+                        <label for='normal'>Normal</label><br>
+                        <label for='todos'>Check List</label>
+                        <input type="text" id='new-todo' name='new-todo'>
+                        <button type="button" id='add-todo'>+</button>
+                        <ul id='new-project-checklist'>
+                        </ul>
+                        <button type="button" id='new-project-submit'>Create</button>
+                    </form>
+                </div>
+    </div>
+<script src='main.js'></script>
+</body>
+</html>
